@@ -120,7 +120,8 @@ if __name__ == "__main__":
     dtol_annotated = dtol_count_fetch[2][0][0]
     dtol_annotated_alternates = dtol_count_fetch[3][0][0]
 
-    dtol_annotated_gcas_query = "SELECT assembly.chain, assembly.version FROM assembly JOIN genebuild_status USING (assembly_id) WHERE assembly.pri_asm_group='dtol' AND genebuild_status.annotation_source='ensembl';"
+    #note: this doesn't include braker annotations!
+    dtol_annotated_gcas_query = "SELECT assembly.chain, assembly.version FROM assembly JOIN genebuild_status USING (assembly_id) WHERE assembly.pri_asm_group='dtol' AND genebuild_status.progress_status='handed over' AND genebuild_status.annotation_source='ensembl';"
     dtol_annotated_gcas_return = mysql_fetch_data(
         dtol_annotated_gcas_query,
         db_name,
